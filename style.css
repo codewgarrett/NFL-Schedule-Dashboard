@@ -45,3 +45,18 @@ header {
     font-weight: bold;
     color: green;
 }
+
+.team-logo {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+img{
+
+  height: 40px;
+  width: 30px;
+  margin-bottom: -8px;
+  margin-right: 5px;
+}

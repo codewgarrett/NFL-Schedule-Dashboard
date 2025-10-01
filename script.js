@@ -63,7 +63,9 @@ async function loadSchedule() {
 
           card.innerHTML = `
             <h3>
+              <img src="${game.awayLogo}" alt="${game.awayTeam}" class="team-logo">
               <span class="${awayClass}">${game.awayTeam}</span> @ 
+              <img src="${game.homeLogo}" alt="${game.homeTeam}" class="team-logo">
               <span class="${homeClass}">${game.homeTeam}</span>
             </h3>
             <p><strong>Date:</strong> ${gameDate}</p>
@@ -74,7 +76,10 @@ async function loadSchedule() {
           `;
         } else {
           card.innerHTML = `
-            <h3>${game.awayTeam} @ ${game.homeTeam}</h3>
+            <h3><img src="${game.awayLogo}" alt="${game.awayTeam}" class="team-logo">
+            ${game.awayTeam} @ 
+            <img src="${game.homeLogo}" alt="${game.homeTeam}" class="team-logo">
+            ${game.homeTeam}</h3>
             <p><strong>Date:</strong> ${gameDate.toLocaleString()}</p>
             <p><em>Starts in: <span class="countdown">Loading...</span></em></p>
           `;
@@ -118,7 +123,9 @@ function parseEspnScoreboard(apiData, weekNumber) {
 
     return {
       homeTeam: home.team.displayName,
+      homeLogo: home.team.logo,        
       awayTeam: away.team.displayName,
+      awayLogo: away.team.logo,   
       homeScore: status === "STATUS_FINAL" ? parseInt(home.score) : null,
       awayScore: status === "STATUS_FINAL" ? parseInt(away.score) : null,
       status: status === "STATUS_FINAL" ? "completed" : "upcoming",
