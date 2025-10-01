@@ -1,0 +1,47 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f3f3f3;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: #002244;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+#filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 20px;
+}
+
+#gamesContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1rem;
+  padding: 20px;
+}
+
+.game-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.completed {
+  border-left: 6px solid green;
+}
+
+.upcoming {
+  border-left: 6px solid blue;
+}
+
+.winner{
+    font-weight: bold;
+    color: green;
+}
