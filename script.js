@@ -3,20 +3,20 @@ async function loadSchedule() {
   const weekSelect = document.getElementById("weekSelect");
 
   try {
-    // Create an array of fetch promises for weeks 1-18
+    
     const weekPromises = [];
     for (let week = 1; week <= 18; week++) {
       const url = `https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=${week}`;
       weekPromises.push(fetch(url).then(res => res.json()));
     }
 
-    // Wait for all fetches to complete
+    
     const allWeekData = await Promise.all(weekPromises);
 
-    // Parse each week's data
+    
     const allWeeks = allWeekData.map((data, index) => parseEspnScoreboard(data, index + 1));
 
-    // Populate week dropdown
+    
     allWeeks.forEach(weekData => {
       const option = document.createElement("option");
       option.value = weekData.week;
@@ -24,17 +24,17 @@ async function loadSchedule() {
       weekSelect.appendChild(option);
     });
 
-    // Render first week by default
+    
     renderGames(allWeeks[0].games);
 
-    // Week selection
+    
     weekSelect.addEventListener("change", (e) => {
       const selectedWeek = parseInt(e.target.value);
       const weekData = allWeeks.find(w => w.week === selectedWeek);
       renderGames(weekData.games);
     });
 
-    // Team search
+    
     document.getElementById("teamSearch").addEventListener("input", (e) => {
       const searchTerm = e.target.value.toLowerCase();
       const allGamesFlat = allWeeks.flatMap(w => w.games);
@@ -44,7 +44,7 @@ async function loadSchedule() {
       renderGames(filtered);
     });
 
-    // Render function
+    
     function renderGames(games) {
       gamesContainer.innerHTML = "";
 
@@ -85,7 +85,7 @@ async function loadSchedule() {
           `;
             const countdownSpan = card.querySelector(".countdown");
 
-      // Update countdown every second
+      
       const interval = setInterval(() => {
         const now = new Date();
         const diff = game.date - new Date();
@@ -113,13 +113,13 @@ async function loadSchedule() {
   }
 }
 
-// Transform ESPN API data into your week/game structure
+
 function parseEspnScoreboard(apiData, weekNumber) {
   const games = apiData.events.map(event => {
     const competition = event.competitions[0];
     const home = competition.competitors.find(c => c.homeAway === "home");
     const away = competition.competitors.find(c => c.homeAway === "away");
-    const status = competition.status.type.name; // STATUS_FINAL or STATUS_SCHEDULED
+    const status = competition.status.type.name; 
 
     return {
       homeTeam: home.team.displayName,
@@ -136,5 +136,5 @@ function parseEspnScoreboard(apiData, weekNumber) {
   return { week: weekNumber, games };
 }
 
-// Run on page load
+
 loadSchedule();
